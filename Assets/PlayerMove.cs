@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public Animator anim;
+
     public float moveSpeed;
     public float airMoveSpeed;
     public float maxSpeed;
@@ -13,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public LayerMask layers;
     float horizontal;
     public bool grounded;
+    
     Rigidbody2D physBody;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +27,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
-        grounded = Physics2D.OverlapCapsule(transform.position+Vector3.up,new Vector2(.8f,2.125f),CapsuleDirection2D.Vertical,0,layers);
+        grounded = Physics2D.OverlapCapsule(transform.position+Vector3.up *0.75f,new Vector2(.8f,2.8f),CapsuleDirection2D.Vertical,0,layers);
         
 
         if(grounded == true)
@@ -45,6 +48,27 @@ public class PlayerMove : MonoBehaviour
 
         physBody.velocity = new Vector2(Mathf.Clamp(physBody.velocity.x,-maxSpeed,maxSpeed),physBody.velocity.y);
 
-        
+        //Anim
+        if(physBody.velocity.x <-.25f)
+            anim.transform.localScale = new Vector2(-0.75f,0.75f);
+        if(physBody.velocity.x >.25f)
+            anim.transform.localScale = new Vector2(0.75f,0.75f);
+
+        if(grounded == false)
+        {
+            anim.SetInteger("State",2);
+        }
+        else
+        {
+            if(Mathf.Abs(physBody.velocity.x) > 1f)
+            {
+                anim.SetInteger("State",1);
+                anim.SetFloat("Speed",Mathf.Abs(physBody.velocity.x));
+            }
+            else
+            {
+                anim.SetInteger("State",0);
+            }
+        }
     }
 }
