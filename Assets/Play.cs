@@ -17,6 +17,6 @@ public class Play : MonoBehaviour
     // Update is called once per frame
     void PeClick()
     {
-        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("Nivel", LoadSceneMode.Single);
     }
 }
