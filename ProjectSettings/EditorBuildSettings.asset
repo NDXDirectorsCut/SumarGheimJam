@@ -14,4 +14,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Nivel.unity
     guid: 7f9a1741ae7cfca4e8448ffc5435d065
+  - enabled: 1
+    path: Assets/scena.paul.unity
+    guid: e72902d7d52c4ed46877b0a7fd4c03bb
+  - enabled: 1
+    path: Assets/scena.paul2.unity
+    guid: 7177f4d7b616f4444acd713bd0c5c23c
+  - enabled: 1
+    path: Assets/scena.paul3.unity
+    guid: fa300bba81b850442b16cdbf18dfad16
+  - enabled: 1
+    path: Assets/scena.paul4.unity
+    guid: f4fd723f1ff29a64c914aa064746b247
+  - enabled: 1
+    path: Assets/scena.paul5.unity
+    guid: 1676a4720bcbccc41b36a1e288e724ec
+  - enabled: 1
+    path: Assets/scena.paul6.unity
+    guid: 53731278b71e8fe4b9610d137e354824
   m_configObjects: {}
