@@ -42,7 +42,7 @@ public class Ghost : MonoBehaviour
 
     void OnEnable()
     {
-        Invoke("PositionSelf", secondsDelay);
+        //Invoke("PositionSelf", secondsDelay);
     }
 
     void PositionSelf()
@@ -74,7 +74,7 @@ public class Ghost : MonoBehaviour
         //Invoke("PositionSelf", secondsDelay);
         yield return new WaitForSeconds(secondsDelay+0.25f);
         used = false;
-        Debug.Log("used = false From Ghost.cs");
+        //Debug.Log("used = false From Ghost.cs");
         sync = true;
     }
 
@@ -90,7 +90,7 @@ public class Ghost : MonoBehaviour
             if(collider.transform.GetComponent<InsanitySystem>() != null)
             {
                 used = true;
-                Debug.Log("used = true From Ghost.cs");
+                //Debug.Log("used = true From Ghost.cs");
                 collider.transform.GetComponent<InsanitySystem>().insanity += insanityChange;
                 sync = false;
                 transform.position = tele;
