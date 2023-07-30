@@ -25,19 +25,11 @@ public class InsanityChange : MonoBehaviour
     void Update()
     {
         Collider2D collider;
-        if(ghost == false)
-             collider = Physics2D.OverlapCircle(transform.position,radius,layers);
-        else
-        {
-             collider = Physics2D.OverlapCapsule(transform.position + Vector3.up * 0.75f, new Vector2(.8f, 2.8f), CapsuleDirection2D.Vertical, 0, layers);
-        }
+        collider = Physics2D.OverlapCircle(transform.position,radius,layers);
+
 
         if(collider != null && used == false)
         {
-            if(used == true && ghost == true)
-            {
-                transform.position = tele;
-            }   
             if(collider.transform.GetComponent<InsanitySystem>() != null)
             {
                 used = true;
@@ -48,23 +40,16 @@ public class InsanityChange : MonoBehaviour
                 }
                 if(reusable == true)
                 {
-                    //StartCoroutine(Reuse(1));
-                }
-                if(ghost == true)
-                {
-                    //ghostScript
-                    ghostScript.enabled = false;
-                    transform.position = tele;
+                    StartCoroutine(Reuse(1));
                 }
             }
         }
 
-        
-
     }
 
-    //IEnumerator Reuse(float delay)
-    //{
-        
-    //}
+    IEnumerator Reuse(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        used = false;
+    }
 }

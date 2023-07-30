@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class GhostChange
@@ -12,6 +13,9 @@ public class GhostChange
 public class InsanitySystem : MonoBehaviour
 {
     public RectTransform progressBar;
+    public GameObject fadeToBlack;
+    public Vector3 respawnPos;
+    public float spawnTime = 1.5f;
     //public GhostChange[] ghostChanges;
     public Ghost ghostScript;
     public Schizo effects;
@@ -24,6 +28,7 @@ public class InsanitySystem : MonoBehaviour
     public float lerp;
     public float insanity;
     public float decay;
+    bool canDie = true;
     //[Space(20)]
 
     // Start is called before the first frame update
@@ -33,14 +38,43 @@ public class InsanitySystem : MonoBehaviour
         //Debug.Log(progressBar.parent.gameObject.GetComponent<RectTransform>().sizeDelta);
         width = progressBar.parent.gameObject.GetComponent<RectTransform>().sizeDelta.x;
         height = progressBar.parent.gameObject.GetComponent<RectTransform>().sizeDelta.y;
+        respawnPos = transform.position;
         
+    }
+
+    IEnumerator Respawn()
+    {
+        canDie = false;
+        yield return new WaitForSeconds(spawnTime);
+        transform.position = respawnPos;
+        music.gameObject.SetActive(true);
+        insanity = 100f;
+        transform.GetComponent<PlayerMove>().enabled = true;
+
+        yield return new WaitForSeconds(0.5f);
+        ghostScript.gameObject.SetActive(true);
+        canDie = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         insanity = Mathf.Clamp(insanity,0,100);
-        
+
+        if(insanity <=0)
+        {
+            fadeToBlack.GetComponent<Image>().color = Color.Lerp(fadeToBlack.GetComponent<Image>().color,new Color(0,0,0,1),0.2f*Time.deltaTime*60);
+            transform.GetComponent<PlayerMove>().enabled = false;
+            music.gameObject.SetActive(false);
+            ghostScript.gameObject.SetActive(false);
+            if(canDie == true)
+                StartCoroutine(Respawn());
+        }
+        else
+        {
+            fadeToBlack.GetComponent<Image>().color = Color.Lerp(fadeToBlack.GetComponent<Image>().color,new Color(1,1,1,0),0.2f*Time.deltaTime*60);
+        }
+
         Vector2 progressSize = new Vector2((insanity/100)*width,height);
         progressBar.sizeDelta = Vector2.Lerp(progressBar.sizeDelta,progressSize,lerp);
         insanity -= decay*Time.deltaTime;
