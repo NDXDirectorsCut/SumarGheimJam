@@ -8,6 +8,7 @@ public class InsanityChange : MonoBehaviour
     [Range(0,5)]
     public float radius;
     public float insanityChange;
+    public bool changeSpawn;
     public bool used;
     public bool reusable;
     //public float reusableDelay;
@@ -34,6 +35,10 @@ public class InsanityChange : MonoBehaviour
             {
                 used = true;
                 collider.transform.GetComponent<InsanitySystem>().insanity += insanityChange;
+                if(changeSpawn == true)
+                {
+                    collider.transform.GetComponent<InsanitySystem>().respawnPos = transform.position;
+                }
                 if(deleteOnCollect == true)
                 {
                     Destroy(gameObject);
