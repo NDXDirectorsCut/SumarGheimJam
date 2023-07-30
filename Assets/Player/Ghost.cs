@@ -24,7 +24,7 @@ public class Ghost : MonoBehaviour
     public bool reusable;
     //public float reusableDelay;
 
-    Vector3 tele;
+    public Vector3 tele;
 
     [Header("Copied from PlayerMove")]
     public float moveSpeed;
@@ -74,6 +74,7 @@ public class Ghost : MonoBehaviour
         //Invoke("PositionSelf", secondsDelay);
         yield return new WaitForSeconds(secondsDelay+0.25f);
         used = false;
+        Debug.Log("used = false From Ghost.cs");
         sync = true;
     }
 
@@ -89,6 +90,7 @@ public class Ghost : MonoBehaviour
             if(collider.transform.GetComponent<InsanitySystem>() != null)
             {
                 used = true;
+                Debug.Log("used = true From Ghost.cs");
                 collider.transform.GetComponent<InsanitySystem>().insanity += insanityChange;
                 sync = false;
                 transform.position = tele;

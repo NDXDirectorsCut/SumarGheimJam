@@ -16,6 +16,8 @@ public class InsanitySystem : MonoBehaviour
     public Ghost ghostScript;
     public Schizo effects;
     public SwitchMusic music;
+    public int level;
+    int prevLevel;
     /*public*/ float width;
     /*public*/ float height;
     [Range(0,1)]
@@ -27,6 +29,7 @@ public class InsanitySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        prevLevel = level;
         //Debug.Log(progressBar.parent.gameObject.GetComponent<RectTransform>().sizeDelta);
         width = progressBar.parent.gameObject.GetComponent<RectTransform>().sizeDelta.x;
         height = progressBar.parent.gameObject.GetComponent<RectTransform>().sizeDelta.y;
@@ -45,32 +48,49 @@ public class InsanitySystem : MonoBehaviour
         effects.insanity = (100-insanity)*1.25f;
         music.transition = (insanity/100)*2-.5f;
 
-        if(insanity >=75 && insanity <= 100)
+        if(insanity >=90 && insanity <= 100)
         {
+            //Debug.Log("level 0");
+            level = 0;
             ghostScript.secondsDelay = 3;
             ghostScript.enabled = false;
             ghostScript.gameObject.SetActive(false);
         }
-        else if(insanity >=50 && insanity < 75)
+        if(insanity >=50 && insanity < 90)
         {
-            StartCoroutine(ghostScript.Reuse());
+            level = 1;
+            //Debug.Log("level 1");
+            //StartCoroutine(ghostScript.Reuse());
             ghostScript.secondsDelay = 3;
             ghostScript.enabled = true;
             ghostScript.gameObject.SetActive(true);
         }
-        else if(insanity >=25 && insanity < 50)
+        if(insanity >=25 && insanity < 50)
         {
-            StartCoroutine(ghostScript.Reuse());
+            level = 2;
+            //Debug.Log("level 2");
+            //StartCoroutine(ghostScript.Reuse());
             ghostScript.secondsDelay = 2.5f;
             ghostScript.enabled = true;
             ghostScript.gameObject.SetActive(true);
         }
-        else if(insanity > 0 && insanity < 25)
+        if(insanity > 0 && insanity < 25)
         {
-            StartCoroutine(ghostScript.Reuse());
+            level = 3;
+            //StartCoroutine(ghostScript.Reuse());
             ghostScript.secondsDelay = 1.8f;
             ghostScript.enabled = true;
             ghostScript.gameObject.SetActive(true);
+        }
+        if(level != prevLevel)
+        {
+            prevLevel = level;  
+            ghostScript.used = true;
+            //Debug.Log("used = true From System.cs");
+            //collider.transform.GetComponent<InsanitySystem>().insanity += insanityChange;
+            ghostScript.sync = false;
+            ghostScript.gameObject.transform.position = ghostScript.tele;
+            StartCoroutine(ghostScript.Reuse());
         }
         
         //Debug.Log((progressBar.sizeDelta.x/width)*100);

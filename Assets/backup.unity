@@ -13410,7 +13410,10 @@ MonoBehaviour:
   radius: 0.2
   insanityChange: 5
   used: 0
+  reusable: 0
   deleteOnCollect: 1
+  ghost: 0
+  ghostScript: {fileID: 0}
 --- !u!212 &301310478
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23940,7 +23943,10 @@ MonoBehaviour:
   radius: 0.3
   insanityChange: 100000
   used: 0
+  reusable: 0
   deleteOnCollect: 1
+  ghost: 0
+  ghostScript: {fileID: 0}
 --- !u!212 &546404528
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -48642,6 +48648,7 @@ MonoBehaviour:
   ghostScript: {fileID: 1208218517}
   effects: {fileID: 1077875643}
   music: {fileID: 1023932613}
+  level: 0
   lerp: 0.2
   insanity: 100
   decay: 7
@@ -63060,12 +63067,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 257880367}
     - target: {fileID: 1951884866424505629, guid: f53d788375e299c4ea82bdd626194f19, type: 3}
+      propertyPath: reusable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951884866424505629, guid: f53d788375e299c4ea82bdd626194f19, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1951884866424505629, guid: f53d788375e299c4ea82bdd626194f19, type: 3}
+      propertyPath: damageScript
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951884866424505629, guid: f53d788375e299c4ea82bdd626194f19, type: 3}
       propertyPath: secondsDelay
-      value: 2.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951884866424505629, guid: f53d788375e299c4ea82bdd626194f19, type: 3}
+      propertyPath: insanityChange
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951884866424505629, guid: f53d788375e299c4ea82bdd626194f19, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f53d788375e299c4ea82bdd626194f19, type: 3}
@@ -80091,6 +80114,7 @@ MonoBehaviour:
   ghostScript: {fileID: 1208218517}
   effects: {fileID: 1077875643}
   music: {fileID: 1023932613}
+  level: 0
   lerp: 0.2
   insanity: 100
   decay: 2
@@ -81361,7 +81385,10 @@ MonoBehaviour:
   radius: 0.2
   insanityChange: 5
   used: 0
+  reusable: 0
   deleteOnCollect: 1
+  ghost: 0
+  ghostScript: {fileID: 0}
 --- !u!212 &1806820415
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89952,7 +89979,10 @@ MonoBehaviour:
   radius: 0.2
   insanityChange: 5
   used: 0
+  reusable: 0
   deleteOnCollect: 1
+  ghost: 0
+  ghostScript: {fileID: 0}
 --- !u!212 &1978295143
 SpriteRenderer:
   m_ObjectHideFlags: 0
