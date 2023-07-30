@@ -53,8 +53,10 @@ public class InsanitySystem : MonoBehaviour
             //Debug.Log("level 0");
             level = 0;
             ghostScript.secondsDelay = 3;
-            ghostScript.enabled = false;
-            ghostScript.gameObject.SetActive(false);
+            ghostScript.transform.position = ghostScript.tele;
+            ghostScript.sync = false;
+            //ghostScript.enabled = false;
+            ghostScript.gameObject.SetActive(true);
         }
         if(insanity >=50 && insanity < 90)
         {
@@ -82,7 +84,7 @@ public class InsanitySystem : MonoBehaviour
             ghostScript.enabled = true;
             ghostScript.gameObject.SetActive(true);
         }
-        if(level != prevLevel)
+        if(level != prevLevel && level != 0)
         {
             prevLevel = level;  
             ghostScript.used = true;
