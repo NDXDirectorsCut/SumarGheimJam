@@ -12,6 +12,19 @@ public class Ghost : MonoBehaviour
     public bool jumpDelayed;
     [Range(0,1)]
     public float copyLerp;
+    public bool sync = true;
+    //Vector3 tele;
+    //public bool gotPlayer;
+    //public InsanityChange damageScript;
+
+
+    public LayerMask playerLayer;
+    public float insanityChange;
+    public bool used;
+    public bool reusable;
+    //public float reusableDelay;
+
+    Vector3 tele;
 
     [Header("Copied from PlayerMove")]
     public float moveSpeed;
@@ -24,6 +37,7 @@ public class Ghost : MonoBehaviour
     float horizontal;
     public bool grounded;
     Rigidbody2D physBody;
+    
     // Start is called before the first frame update
 
     void OnEnable()
@@ -44,21 +58,48 @@ public class Ghost : MonoBehaviour
         Vector3 veloCopy = player.GetComponent<Rigidbody2D>().velocity;
         yield return new WaitForSeconds(secondsDelay);
         physBody.velocity = veloCopy;
-        transform.position = Vector3.Slerp(transform.position,posCopy,copyLerp);
+        if(sync==true)
+            transform.position = Vector3.Slerp(transform.position,posCopy,copyLerp);
     }
 
     void Start()
     {
         physBody = gameObject.GetComponent<Rigidbody2D>();
+        tele = transform.position;
+    }
+
+    public IEnumerator Reuse()
+    {
+        transform.position = tele;
+        //Invoke("PositionSelf", secondsDelay);
+        yield return new WaitForSeconds(secondsDelay+0.25f);
+        used = false;
+        sync = true;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+
+
+        Collider2D collider = Physics2D.OverlapCapsule(transform.position + Vector3.up * 0.75f, new Vector2(.8f, 2.8f), CapsuleDirection2D.Vertical, 0, playerLayer);
+        if(collider != null && used == false)
+        {
+            
+            if(collider.transform.GetComponent<InsanitySystem>() != null)
+            {
+                used = true;
+                collider.transform.GetComponent<InsanitySystem>().insanity += insanityChange;
+                sync = false;
+                transform.position = tele;
+                StartCoroutine(Reuse());
+            }
+        }
+
         StartCoroutine(CopyInput());
         //horizontal = Input.GetAxisRaw("Horizontal");
         grounded = Physics2D.OverlapCapsule(transform.position + Vector3.up * 0.75f, new Vector2(.8f, 2.8f), CapsuleDirection2D.Vertical, 0, layers);
-
+        /*
         if(grounded == true)
         {
             physBody.velocity = new Vector2(Mathf.Lerp(physBody.velocity.x,0,moveLerp*Time.deltaTime*60),physBody.velocity.y);
@@ -74,7 +115,7 @@ public class Ghost : MonoBehaviour
         {
             physBody.velocity += new Vector2(0,jumpForce);
         }
-
+        */
         physBody.velocity = new Vector2(Mathf.Clamp(physBody.velocity.x,-maxSpeed,maxSpeed),physBody.velocity.y);
 
         //Anim

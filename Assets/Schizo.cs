@@ -9,6 +9,7 @@ public class Schizo : MonoBehaviour
     public Camera camScript;
 
     public float effectLerp;
+    public float insanity;
     public float faceSpeed;
     public Vector2 faceMinMax;
     public PostProcessVolume ppVolume;
@@ -39,7 +40,7 @@ public class Schizo : MonoBehaviour
 
         if(toggle == false)
         {
-            Debug.Log(bloomEffect.intensity.value);
+            //Debug.Log(bloomEffect.intensity.value);
             bloomEffect.intensity.value = Mathf.Lerp(bloomEffect.intensity.value,0,effectLerp*Time.deltaTime*60);
             chromaEffect.intensity.value = Mathf.Lerp(chromaEffect.intensity.value,0,effectLerp*Time.deltaTime*60);
             grainEffect.intensity.value = Mathf.Lerp(grainEffect.intensity.value,0,effectLerp*Time.deltaTime*60);
@@ -53,14 +54,15 @@ public class Schizo : MonoBehaviour
         {
             bloomEffect.dirtIntensity.value = Mathf.Lerp(faceMinMax.x,faceMinMax.y,sinZeroOne*faceSpeed);
 
-            bloomEffect.intensity.value = Mathf.Lerp(bloomEffect.intensity.value,1,effectLerp*Time.deltaTime*60/2);
-            chromaEffect.intensity.value = Mathf.Lerp(chromaEffect.intensity.value,.8f,effectLerp*Time.deltaTime*60);
-            grainEffect.intensity.value = Mathf.Lerp(grainEffect.intensity.value,.166f,effectLerp*Time.deltaTime*60/4);
-            vignetteEffect.intensity.value = Mathf.Lerp(vignetteEffect.intensity.value,.396f,effectLerp*Time.deltaTime*60);
-            colorEffect.saturation.value = Mathf.Lerp(colorEffect.saturation.value,-48,effectLerp*Time.deltaTime*60);
-            colorEffect.contrast.value = Mathf.Lerp(colorEffect.contrast.value,6,effectLerp*Time.deltaTime*60);
-            camScript.shake = Vector2.Lerp(camScript.shake,new Vector2(.1f,.2f),effectLerp*Time.deltaTime*60);
-            camScript.shakeSpeed = Vector2.Lerp(camScript.shakeSpeed,new Vector2(5,2.5f),effectLerp*Time.deltaTime*60*2);
+            bloomEffect.intensity.value = Mathf.Lerp(0,1,insanity/100);
+            bloomEffect.threshold.value = Mathf.Lerp(0,1,insanity/100);
+            chromaEffect.intensity.value = Mathf.Lerp(0,.8f,insanity/100);
+            grainEffect.intensity.value = Mathf.Lerp(0,.42f,insanity/100);
+            vignetteEffect.intensity.value = Mathf.Lerp(0,.396f,insanity/100);
+            colorEffect.saturation.value = Mathf.Lerp(0,-48,insanity/100);
+            colorEffect.contrast.value = Mathf.Lerp(0,6,insanity/100);
+            camScript.shake = Vector2.Lerp(Vector2.zero,new Vector2(.1f,.2f),insanity/100);
+            //camScript.shakeSpeed = Vector2.Lerp(Vector2.zero,new Vector2(5,2.5f),insanity/100);
         }
 
     }

@@ -21,7 +21,7 @@ MonoBehaviour:
     value: 1
   threshold:
     overrideState: 1
-    value: 0
+    value: 1
   softKnee:
     overrideState: 0
     value: 0.5
@@ -46,7 +46,7 @@ MonoBehaviour:
     defaultState: 1
   dirtIntensity:
     overrideState: 1
-    value: 0
+    value: 5
 --- !u!114 &-2387174877525897031
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -74,7 +74,7 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.396
+    value: 0
   smoothness:
     overrideState: 1
     value: 0.319
@@ -174,7 +174,7 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 1
-    value: -48
+    value: 0
   brightness:
     overrideState: 0
     value: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
     value: 0
   contrast:
     overrideState: 1
-    value: 6
+    value: 0
   mixerRedOutRedIn:
     overrideState: 0
     value: 100
@@ -1442,7 +1442,7 @@ MonoBehaviour:
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 0.8
+    value: 0
   fastMode:
     overrideState: 0
     value: 0
@@ -1467,7 +1467,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.166
+    value: 0
   size:
     overrideState: 1
     value: 1.43
