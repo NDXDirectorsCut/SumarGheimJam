@@ -28,7 +28,7 @@ public class InsanitySystem : MonoBehaviour
     public float lerp;
     public float insanity;
     public float decay;
-    bool canDie = true;
+    public bool canDie = true;
     //[Space(20)]
 
     // Start is called before the first frame update
